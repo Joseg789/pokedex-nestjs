@@ -3,6 +3,8 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path'; //este paquete viene de nodejs y nos permite unir rutas de forma dinamica
 import { PokemonModule } from './pokemon/pokemon.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CommonModule } from './common/common.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     /**TODO: cambiar la url por una variable de entorno */
     MongooseModule.forRoot('mongodb://localhost:27017/pokedex'), //le pasamos la url de nuestra db que estamos usando con docker
     //cargamos el modulo pokemon
-    PokemonModule,
+    PokemonModule, CommonModule, SeedModule,
   ],
 
   controllers: [],
