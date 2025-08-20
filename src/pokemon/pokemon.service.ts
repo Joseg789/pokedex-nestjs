@@ -9,6 +9,8 @@ import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { isValidObjectId, Model } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
 import { InjectModel } from '@nestjs/mongoose';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { off } from 'process';
 //en los servicios va la logica
 @Injectable()
 export class PokemonService {
@@ -42,8 +44,16 @@ export class PokemonService {
   }
 
   //GET ALL
-  findAll() {
-    return `This action returns all pokemon`;
+  findAll(paginationDto: PaginationDto) {
+    const { limit = 10, offset = 0 } = paginationDto; //como son propiedades opcionales si no vienen en los  query parameters las inicializamos por defecto
+    return this.pokemonModel
+      .find()
+      .limit(limit)
+      .skip(offset)
+      .sort({
+        no: 1, //ordenamos por el numero de manera ascendente
+      })
+      .select('-__v'); //le decimos que no queremos que nos devuelva el campo __V que es el version control de mongo
   }
   //GET ONE BY TERM (puede ser id,. numero o nombre )
   async findOne(term: string) {

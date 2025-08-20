@@ -11,5 +11,7 @@ import { Pokemon, PokemonSchema } from './entities/pokemon.entity';
   ],
   controllers: [PokemonController],
   providers: [PokemonService],
+  //exportamos el modulo para que pueda ser usado en otros archivos o en otros servicios
+  exports: [MongooseModule],
 })
 export class PokemonModule {}
