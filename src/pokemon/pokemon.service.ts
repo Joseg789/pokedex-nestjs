@@ -1,27 +1,31 @@
+import { ConfigService } from '@nestjs/config';
 import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { isValidObjectId, Model } from 'mongoose';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
-import { isValidObjectId, Model } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
-import { InjectModel } from '@nestjs/mongoose';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
-import { off } from 'process';
 //en los servicios va la logica
 @Injectable()
 export class PokemonService {
   //injeccion de dependencias para injectar el repositorio o modelo
+  private defaultLimit: number;
 
   constructor(
     //inyectamos el modelo
     @InjectModel(Pokemon.name) //nombre de la entidad o del modelo que queremos usar
     //tambien pasamos como generico el modelo con el que estamos trabajando
     private readonly pokemonModel: Model<Pokemon>,
-  ) {}
+    private readonly configService: ConfigService,
+  ) {
+    this.defaultLimit = configService.get<number>('defaultLimit')!; //obtenemos la variable de entorno con config service
+  }
   //POST //CREATE
   async create(createPokemonDto: CreatePokemonDto) {
     createPokemonDto.name = createPokemonDto.name.toLowerCase(); //convertimos el nombre a minusculas
@@ -45,7 +49,7 @@ export class PokemonService {
 
   //GET ALL
   findAll(paginationDto: PaginationDto) {
-    const { limit = 10, offset = 0 } = paginationDto; //como son propiedades opcionales si no vienen en los  query parameters las inicializamos por defecto
+    const { limit = this.defaultLimit, offset = 0 } = paginationDto; //como son propiedades opcionales si no vienen en los  query parameters las inicializamos por defecto
     return this.pokemonModel
       .find()
       .limit(limit)

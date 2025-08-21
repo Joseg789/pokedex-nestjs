@@ -25,7 +25,13 @@
 
    `npm run start:dev`
 
-6. reconstruir la DB con la semilla o seed (solo ejkecutar en desarrollo o si no se ha ejecutado antes)
+6. Configurar las variables de entorno CLONAR EL ARCHIVOP **.ENV.TEMPLATE** Y RENOMBRAR LA COPIA A **.env**
+
+7. llenar las variables de entorno en el archivo **.env** con sus keys correspondientes
+
+8. ejecutar la aplicacion con `npm run start:dev`
+
+9. reconstruir la DB con la semilla o seed (solo ejkecutar en desarrollo o si no se ha ejecutado antes)
    `http://localhost:3000/api/v2/seed`
 
 ## stack usado
@@ -39,6 +45,8 @@
 - Postman
 - mongoose `npm i --save @nestjs/mongoose mongoose`
 - class validator y class transformer `npm i  class-validator class-transformer`
+  -joi `npm i --save joi`
+- nest config `npm i @nestjs/config`
 
 ### api usada en este caso pokeapi
 
@@ -50,6 +58,7 @@
 - instalamos nest cli con el comando `npm install -g @nestjs/cli`
 - instalamos mongoose con el comando `npm install --save @nestjs/mongoose mongoose`
 - instalamos class-validator y class-transformer con el comando `npm install --save class-validator class-transformer`
+- INSTALAR NESTCONFIG PARA USAR LAS VARIABLES DE ENTORNO `npm i @nestjs/config`
 - instalamos postman para hacer pruebas con la api
 - instalamos docker para levantar la base de datos
 - instalamos docker-compose para levantar la base de datos
