@@ -1,0 +1,7 @@
+#este archivo contiene las rutas que no queremos que se suban a docker
+#por ejemplo, los archivos de la carpeta node_modules
+#o los archivos de la carpeta dist etc 
+dist/
+node_modules/
+.gitignore
+.git/

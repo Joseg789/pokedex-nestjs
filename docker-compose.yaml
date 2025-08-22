@@ -1,3 +1,6 @@
+#archivo de configuracion para docker-compose en desarrollo
+#docker-compose up -d
+
 version: '3'
 services:
   db:

@@ -34,6 +34,15 @@
 9. reconstruir la DB con la semilla o seed (solo ejkecutar en desarrollo o si no se ha ejecutado antes)
    `http://localhost:3000/api/v2/seed`
 
+### PRODUCTION BUILD DOCKER
+
+1. CREAR EL ARCHIVO **.env** Y RENOMBRAR EL ARCHIVO **.env.template** A **.env**
+2. LLENAR LOS VALORES DE LAS VARIABLES DE ENTORNO EN EL ARCHIVO
+3. CREAR LA NUEVA IMAGEN
+   `docker-compose -f docker-compose.prod.yml --env-flie .env.prod up -- build `
+4. levantar la aplicacion y db
+   `docker-compose -f docker-compose.prod.yml --env-flie .env.prod up -d`
+
 ## stack usado
 
 - mongoDB
